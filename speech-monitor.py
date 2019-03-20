@@ -1,18 +1,17 @@
 import pyaudio
-from queue import Queue
 import sys
 import time
-from matplotlib import pyplot as plt
 import numpy as np
-from keras.models import Model, load_model, Sequential
-import matplotlib.mlab as mlab
-from utils import storeWavFile
+import subprocess
+from queue import Queue
+# from keras.models import Model, load_model, Sequential, model_from_json
+
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-from utils import getNumberOfFiles
+from utils import *
 
 
-chunk_duration = 0.15 # Each read length in seconds from mic.
+chunk_duration = 0.05 # Each read length in seconds from mic.
 fs = 44100 # sampling rate for mic
 chunk_samples = int(fs * chunk_duration) # Each read length in number of samples.
 
@@ -20,7 +19,15 @@ DEFAULT_CHUNKNAME = './chunks/chunk{}.wav'
 
 frames = []
 writing = False
+
+
+subprocess.call('./remove-chunks.sh')
+
 fileOffset = getNumberOfFiles()
+
+
+
+q = Queue()
 
 
 # model = load_model('./models/tr_model.h5')
@@ -36,6 +43,7 @@ def get_audio_input_stream(callback):
         input_device_index=0,
         stream_callback=callback)
     return stream
+
 
 
 
@@ -90,6 +98,23 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
 
             storeWavFile(frames, filename, False)
 
+            #get mfcc of the file just saves and predict
+
+
+            # stream.stop_stream()
+
+            data = average(findMfcc(filename))
+            q.put(data)
+
+
+
+            # print(data)
+            # data = normalize(data)
+            # print(data)
+
+            # predictsingle(model, data)
+
+
             frames = []
 
         return (in_data, pyaudio.paContinue)
@@ -110,7 +135,7 @@ if __name__ == '__main__':
 
     # Queue to communicate between the audio callback and main thread
 
-    # q = Queue()
+    model = loadmodel()
 
     run = True
 
@@ -126,16 +151,15 @@ if __name__ == '__main__':
     stream.start_stream()
 
     try:
-        while run:
+        while True:
 
-            continue
+            data = q.get()
+            n = normalize(data)
+            # print(n)
+            predictsingle(model,n)
 
-            # data = q.get()  # FIFO
 
-            # # he uses spectrum data to make preds
-            # spectrum = get_spectrogram(data)
-            # # preds = detect_triggerword_spectrum(spectrum)
-            #
+
             # new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
             #
             # if new_trigger:

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72d39682-a522-40da-b024-66b058bace7e" name="Default Changelist" comment="" />
+    <list default="true" id="72d39682-a522-40da-b024-66b058bace7e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trigger word detection - v1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/tr_model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/remove-chunks.sh" beforeDir="false" afterPath="$PROJECT_DIR$/remove-chunks.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/samples/test1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/samples/test2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/samples/test3.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/samples/test4.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/samples/test5.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/speech-monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/speech-monitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trigger_word_real_time_demo.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,14 +48,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2921" />
-          <entry key="sh" value="114" />
+          <entry key="py" value="4382" />
+          <entry key="sh" value="115" />
+          <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Bash" value="114" />
-          <entry key="Python" value="2921" />
+          <entry key="Bash" value="115" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Python" value="4382" />
         </counts>
       </usages-collector>
     </session>
@@ -51,8 +67,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/remove-chunks.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -60,10 +76,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1606">
-              <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
+            <state relative-caret-position="259">
+              <caret line="176" column="39" selection-start-line="176" selection-start-column="39" selection-end-line="176" selection-end-column="39" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
+                <marker date="1553112409152" expanded="true" signature="4080:4129" ph="..." />
+                <marker date="1553112409152" expanded="true" signature="4186:4796" ph="..." />
+                <marker date="1553112409152" expanded="true" signature="4920:4987" ph="..." />
+                <marker date="1553112409152" expanded="true" signature="5742:5745" ph="..." />
+                <marker date="1553112409152" expanded="true" signature="5764:5769" ph="..." />
               </folding>
             </state>
           </provider>
@@ -72,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/speech-monitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="147" column="19" lean-forward="true" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
+            <state relative-caret-position="135">
+              <caret line="148" column="102" lean-forward="true" selection-start-line="148" selection-start-column="102" selection-end-line="148" selection-end-column="102" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -84,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+            <state relative-caret-position="30">
+              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -109,6 +130,8 @@
       <find>getnum</find>
       <find>data</find>
       <find>t</find>
+      <find>predictsin</find>
+      <find>parsein</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -118,11 +141,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/remove-chunks.sh" />
         <option value="$PROJECT_DIR$/test2.py" />
         <option value="$PROJECT_DIR$/init.py" />
-        <option value="$PROJECT_DIR$/utils.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/remove-chunks.sh" />
         <option value="$PROJECT_DIR$/speech-monitor.py" />
+        <option value="$PROJECT_DIR$/utils.py" />
       </list>
     </option>
   </component>
@@ -148,7 +172,7 @@
             <path>
               <item name="realtimeaudio" type="b2602c69:ProjectViewProjectNode" />
               <item name="realtimeaudio" type="462c0819:PsiDirectoryNode" />
-              <item name="samples" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -172,7 +196,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.speech-monitor">
+  <component name="RunManager" selected="Bash.remove-chunks.sh">
     <configuration name="remove-chunks.sh" type="BashConfigurationType" factoryName="Bash" temporary="true">
       <module name="realtimeaudio" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -277,8 +301,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.speech-monitor" />
         <item itemvalue="Bash.remove-chunks.sh" />
+        <item itemvalue="Python.speech-monitor" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.test2" />
         <item itemvalue="Python.test" />
@@ -300,14 +324,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="43" width="1400" height="833" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32928476" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32928476" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -320,6 +343,25 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32928476" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -345,20 +387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/remove-chunks.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/init.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -366,20 +394,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/remove-chunks.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1606">
-          <caret line="114" lean-forward="true" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="259">
+          <caret line="176" column="39" selection-start-line="176" selection-start-column="39" selection-end-line="176" selection-end-column="39" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
+            <marker date="1553112409152" expanded="true" signature="4080:4129" ph="..." />
+            <marker date="1553112409152" expanded="true" signature="4186:4796" ph="..." />
+            <marker date="1553112409152" expanded="true" signature="4920:4987" ph="..." />
+            <marker date="1553112409152" expanded="true" signature="5742:5745" ph="..." />
+            <marker date="1553112409152" expanded="true" signature="5764:5769" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/speech-monitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="147" column="19" lean-forward="true" selection-start-line="147" selection-start-column="19" selection-end-line="147" selection-end-column="19" />
+        <state relative-caret-position="135">
+          <caret line="148" column="102" lean-forward="true" selection-start-line="148" selection-start-column="102" selection-end-line="148" selection-end-column="102" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
