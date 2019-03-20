@@ -1,13 +1,16 @@
 import pyaudio
 from queue import Queue
-from threading import Thread
 import sys
 import time
 from matplotlib import pyplot as plt
 import numpy as np
 from keras.models import Model, load_model, Sequential
 import matplotlib.mlab as mlab
-from test import storeWavFile
+from utils import storeWavFile
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+from utils import getNumberOfFiles
+
 
 chunk_duration = 0.5 # Each read length in seconds from mic.
 fs = 44100 # sampling rate for mic
@@ -16,7 +19,11 @@ chunk_samples = int(fs * chunk_duration) # Each read length in number of samples
 # Each model input data duration in seconds, need to be an integer numbers of chunk_duration
 feed_duration = 10 # the input size for the model
 feed_samples = int(fs * feed_duration)
-t = 0
+DEFAULT_CHUNKNAME = './chunks/chunk{}.wav'
+
+frames = []
+writing = False
+fileOffset = getNumberOfFiles()
 
 
 assert feed_duration/chunk_duration == int(feed_duration/chunk_duration)
@@ -124,107 +131,129 @@ def has_new_triggerword(predictions, chunk_duration, feed_duration, threshold=0.
 
 
 
+def splitWavFileAndStore(filename, minsillen= 60, silthresh = -60):
+
+    line = AudioSegment.from_wav(filename)
+
+    audio_chunks = split_on_silence(line, min_silence_len=minsillen, silence_thresh=silthresh)  # isolation of words is done here
+
+    rejectedOffset = 0
+
+    for i, chunk in enumerate(audio_chunks): # audio_chunks is a python list
+
+
+
+        out_file = DEFAULT_CHUNKNAME.format(i+fileOffset)
+        # print("size of chunk{}: {} ".format(i+fileOffset, len(chunk)))
+        # print ("exporting", out_file)
+        chunk.export(out_file, format="wav")
+        # print("done exporting...")
+
+    # print("Total number of files:", i+1)
+
+    return i+1
+
+
 
 def callback(in_data, frame_count, time_info, status): # also responsible for putting the data into the queue
 
     # in_data is each chunk corresponding to 0.5 sec size
 
-    global run, timeout, data, silence_threshold, t
+    global run, timeout, data, silence_threshold, fileOffset, writing, frames
+
+
 
     if time.time() > timeout: # stream will continue till timeout is invoked
         run = False
-    data0 = np.frombuffer(in_data, dtype='int16')
+    data_new = np.frombuffer(in_data, dtype='int16')
 
 
-    if np.abs(data0).mean() < silence_threshold: # find the mean of the chunk for that small duration
+    if np.abs(data_new).mean() < silence_threshold: # find the mean of the chunk for that small duration
         sys.stdout.write('-')
+        writing = False
+
+        if (writing == False) and (len(frames) != 0):  # if not writing and data is non empty, store in wav file
+
+            # get new filename
+            # print("saving")
+            filename = './samples/test' + str(fileOffset) + '.wav'
+            fileOffset = fileOffset + 1
+
+            storeWavFile(frames, filename, False)
+
+            frames = []
+
         return (in_data, pyaudio.paContinue)
+
     else:
+        # print('writing')
         sys.stdout.write('.')
+        frames.append(in_data)
 
 
-    data = np.append(data, data0) # this line only runs when speech is heard
+        writing = True
 
 
 
-    if len(data) > feed_samples: # this line only runs when there is fresh data greater than 10 seconds
+    # splitWavFileAndStore(filename)
 
-        data = data[-feed_samples:]
 
-        storeWavFile(data0, './samples/test' + str(t) + '.wav', False)
-        t = t + 1
 
-        # Process data async by sending a queue.
-        q.put(data)
+    # if len(data) > feed_samples: # this line only runs when there is fresh data greater than 10 seconds
+    #
+    #     data = data[-feed_samples:]
+    #
+    #
+    #
+    #
+    #     # Process data async by sending a queue.
+    #     q.put(data)
 
     return (in_data, pyaudio.paContinue)
 
 
+if __name__ == '__main__':
 
-def testcallback(in_data, frame_count, time_info, status):
-    print("test callback running")
-    global run, timeout, data, silence_threshold
-    if time.time() > timeout:  # stream will continue till timeout is invoked
+    # Queue to communicate between the audio callback and main thread
+    q = Queue()
+
+    run = True
+
+    silence_threshold = 100  # not in db
+
+    # Run the demo for a timeout seconds
+    timeout = time.time() + 0.5 * 60  # 0.5 minutes from now
+
+    # Data buffer for the input wavform
+    data = np.zeros(feed_samples, dtype='int16')
+
+    stream = get_audio_input_stream(callback)  # creates the PyAudio() instance with callback function
+    # every time
+    stream.start_stream()
+
+    try:
+        while run:
+
+            data = q.get()  # FIFO
+
+            print(run)
+
+            # # he uses spectrum data to make preds
+            # spectrum = get_spectrogram(data)
+            # # preds = detect_triggerword_spectrum(spectrum)
+            #
+            # new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
+            #
+            # if new_trigger:
+            #     sys.stdout.write('1')
+
+    except (KeyboardInterrupt, SystemExit):
+        stream.stop_stream()
+        stream.close()
+        timeout = time.time()
         run = False
-    data0 = np.frombuffer(in_data, dtype='int16')
-    if np.abs(data0).mean() < silence_threshold:  # find the mean of the chunk for that small duration
-        sys.stdout.write('-')
-        return (in_data, pyaudio.paContinue)
-    else:
-        sys.stdout.write('.')
-    data = np.append(data, data0)
-    if len(data) > feed_samples:
-        data = data[-feed_samples:]
-        # Process data async by sending a queue.
-        q.put(data)
-    return (in_data, pyaudio.paContinue)
 
-
-# IF NAME == MAIN
-
-
-# Queue to communiate between the audio callback and main thread
-q = Queue()
-
-run = True
-
-silence_threshold = 100 # not in db
-
-# Run the demo for a timeout seconds
-timeout = time.time() + 0.5 * 60  # 0.5 minutes from now
-
-# Data buffer for the input wavform
-data = np.zeros(feed_samples, dtype='int16')
-
-
-stream = get_audio_input_stream(callback) # creates the PyAudio() instance with callback function
-# every time
-stream.start_stream()
-
-
-
-try:
-    t = 0
-    while run:
-
-        data = q.get() #FIFO
-
-        print(run)
-
-        # he uses spectrum data to make preds
-        spectrum = get_spectrogram(data)
-        preds = detect_triggerword_spectrum(spectrum)
-
-        new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
-
-        if new_trigger:
-            sys.stdout.write('1')
-
-except (KeyboardInterrupt, SystemExit):
     stream.stop_stream()
     stream.close()
-    timeout = time.time()
-    run = False
 
-stream.stop_stream()
-stream.close()
+
