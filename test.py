@@ -48,7 +48,7 @@ def startRecording(seconds = RECORD_SECONDS):
 
         print ("finished")
 
-        storeWavFile(frames, './test'+str(t)+'.wav')
+        storeWavFile(frames, './samples/test'+str(t)+'.wav')
         t = t+1
         plt.plot(temp)
         plt.show()
