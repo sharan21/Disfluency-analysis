@@ -20,9 +20,7 @@ DEFAULT_CHUNKNAME = './chunks/chunk{}.wav'
 frames = []
 
 
-subprocess.call('./remove-chunks.sh')
-
-fileOffset = getNumberOfFiles()
+fileOffset = getNumberOfFiles('./chunks')
 
 run = True
 
