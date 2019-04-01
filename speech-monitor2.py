@@ -2,22 +2,29 @@ import pyaudio
 import sys
 import time
 import numpy as np
-import subprocess
 from queue import Queue
-# from keras.models import Model, load_model, Sequential, model_from_json
+from keras.models import Model, load_model, Sequential, model_from_json
 
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from utils import *
 
 
-chunk_duration = 0.05 # Each read length in seconds from mic.
-fs = 44100 # sampling rate for mic
-chunk_samples = int(fs * chunk_duration) # Each read length in number of samples.
+chunk_duration = 0.1
+fs = 44100
+chunk_samples = int(fs * chunk_duration)
 
 DEFAULT_CHUNKNAME = './chunks/chunk{}.wav'
 
 frames = []
+
+pauseduration = []
+pausetemp = 0
+
+wordduration = []
+wordtemp = 0
+
+silencenow = False
 
 
 fileOffset = getNumberOfFiles('./chunks')
@@ -26,9 +33,6 @@ run = True
 
 timestart = time.time()
 duration = 10
-
-
-
 
 
 
@@ -42,7 +46,6 @@ def get_audio_input_stream(callback):
         input_device_index=0,
         stream_callback=callback)
     return stream
-
 
 
 
@@ -75,10 +78,13 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
 
     # in_data is each chunk corresponding to 0.5 sec size
 
-    global run, duration, timestart
+    global run, duration, timestart, silencenow, wordtemp, pausetemp, wordduration, pauses
 
 
     if (time.time() - timestart) > duration: # stream will continue till timeout is invoked
+        if silencenow:
+            wordduration.append(time.time() - wordtemp)
+
         run = False
 
     data_new = np.frombuffer(in_data, dtype='int16')
@@ -87,11 +93,26 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
 
     if np.abs(data_new).mean() < silence_threshold: # find the mean of the chunk for that small duration
         sys.stdout.write('-')
+        if not silencenow:
+            silencenow = True
+            # start counting
+            wordtemp = time.time()
+
 
         return (in_data, pyaudio.paContinue)
 
     else:
         sys.stdout.write('.')
+
+        if silencenow:
+            silencenow = False
+            wordduration.append(time.time()-wordtemp)
+
+
+
+
+
+
 
 
     return (in_data, pyaudio.paContinue)
@@ -99,29 +120,28 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
 
 
 
+
+
 if __name__ == '__main__':
 
-    # Queue to communicate between the audio callback and main thread
 
-    model = loadmodel()
+    # model = loadmodel('./models/average9.json', './models/average9.h5')
 
+    silence_threshold = 100
 
-    silence_threshold = 100  # not in db
-
-
-
-    stream = get_audio_input_stream(callback)  # creates the PyAudio() instance with callback function
-    stream.start_stream()
+    stream = get_audio_input_stream(callback)
 
 
     while run:
         continue
 
+    wordduration.pop()
+
     storeWavFile(frames, './sentences/testing.wav')
 
     splitWavFileAndStore('./sentences/testing.wav')
 
-
+    print(wordduration)
 
     stream.stop_stream()
     stream.close()
