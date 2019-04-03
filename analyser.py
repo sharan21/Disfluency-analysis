@@ -15,42 +15,35 @@ def clearlogs():
     f = open("./logs/stats.txt", "w")
     f.write("")
 
-class stutteranalyser():
-
-    path = './sentences/test.wav'
-    pathforchunks = './chunks'
-
-    pathtomodeljson = './modules/models/average9.json'
-    pathtomodelh5 = './modules/models/average9.h5'
-
-    frames = []
-
-    pausedurations = []
-
-    wordcount = 0
-    sentencecount = 0
-    totalsilence = 0
-    totalduration = 0
-    llcount = 0
-    nonllcount = 0
-    llratio = 0
-    status = False
-    llscore = 0
-    instancename = ""
+class stuttermonitor():
 
 
-    def __init__(self, name = 'defaultname', duration = 10):
+
+    def __init__(self, name = 'defaultname', path = './chunks'):
 
         # print ("init running")
+
         self.instancename = name
-        self.totalduration = duration
 
+        self.pathforsentences = './sentences/test.wav'
+        self.pathforchunks = path
 
+        self.pathtomodeljson = './modules/models/average9.json'
+        self.pathtomodelh5 = './modules/models/average9.h5'
+
+        self.frames = []
+
+        self.wordcount = 0
+        self.totalsilence = 0
+        self.llcount = 0
+        self.nonllcount = 0
+        self.llratio = 0
+        self.success = False
 
     def getSound(self):
 
         frames = startRecording()
-        storeWavFile(frames, self.path)
+        storeWavFile(frames, self.pathforsentences)
 
         line = AudioSegment.from_wav(self.path)
 
@@ -91,7 +84,10 @@ class stutteranalyser():
         print ("emptied chunks from temp")
 
 
-    def statistics(self):
+
+
+
+    def buildstatistics(self):
 
         print ("building statistics on last 10 seconds...")
 
@@ -106,7 +102,7 @@ class stutteranalyser():
         self.llratio = self.llcount/self.wordcount
 
 
-        self.status= True if self.llratio > 0.8 else False
+        self.success= True if self.llratio > 0.8 else False
 
         print("{}% fluency in your speech".format(self.llratio*100))
 
@@ -131,16 +127,16 @@ class stutteranalyser():
 if __name__ == '__main__':
 
 
-        sentence1 = stutteranalyser("sentence1")
+        sentence1 = stuttermonitor("sentence1")
         sentence1.getSound()
-        sentence1.statistics()
+        sentence1.buildstatistics()
         sentence1.savestatistics()
 
         del sentence1
 
-        sentence2 = stutteranalyser("sentence2")
+        sentence2 = stuttermonitor("sentence2")
         sentence2.getSound()
-        sentence2.statistics()
+        sentence2.buildstatistics()
         sentence2.savestatistics()
 
         del sentence2
@@ -148,11 +144,5 @@ if __name__ == '__main__':
 
         # clearlogs()
 
-        # sentence3 = stutteranalyser("sentence3")
-        # sentence3.getSound()
-        # sentence3.statistics()
-        # sentence3.savestatistics()
-        # sentence3.clearlogs()
-        #
-        # del sentence3
+
 

@@ -1,12 +1,7 @@
-import pyaudio
-import sys
 import time
-import numpy as np
-from keras.models import Model, load_model, Sequential, model_from_json
-
-from stutteranalyser import stutteranalyser
+from analyser import stuttermonitor
 import sys
-
+import subprocess
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from utils import *
@@ -15,8 +10,11 @@ from utils import *
 
 class speechmonitor:
 
-    def __init__(self):
+    def __init__(self, name='defaultrecorder', duration=10):
+
         print("hello")
+
+        self.instancename = name
 
         self.chunk_duration = 0.1
         self.fs = 44100
@@ -42,13 +40,17 @@ class speechmonitor:
         self.pathtochunks = './chunks'
 
         self.timestart = time.time()
-        self.duration = 10
+        self.duration = duration
 
 
 
 
     def __del__(self):
         print("deleting")
+        subprocess.call('./empty_temp.sh')
+        print('deleted chunks')
+
+
 
 
     def get_audio_input_stream(self):
@@ -115,14 +117,8 @@ class speechmonitor:
 
 
 
-
-
-
     def callback(self, in_data, frame_count, time_info, status):  # also responsible for putting the data into the queue
 
-        # in_data is each chunk corresponding to 0.5 sec size
-
-        # global run, duration, timestart, silencenow, wordtemp, pausetemp, wordduration, pauses
 
         if (time.time() - self.timestart) > self.duration:  # stream will continue till timeout is invoked
             if self.silencenow:
@@ -130,7 +126,7 @@ class speechmonitor:
 
             self.run = False
 
-            self.wordduration.pop()
+            # self.wordduration.pop()
 
         data_new = np.frombuffer(in_data, dtype='int16')
         self.frames.append(in_data)
@@ -157,25 +153,27 @@ class speechmonitor:
 
 if __name__ == '__main__':
 
-    s = speechmonitor()
-    sentence = stutteranalyser()
 
-    stream = s.get_audio_input_stream()
+    timenow = time.time()
 
-    while s.run:
-        continue
+    while (time.time() - timenow < 10):
 
+        recorder = speechmonitor()
 
-    storeWavFile(s.frames, './sentences/testing.wav')
+        stream = recorder.get_audio_input_stream()
 
-    s.splitWavFileAndStore('./sentences/testing.wav')
+        while recorder.run:
+            continue
 
-    print(s.wordduration)
+        storeWavFile(recorder.frames, './sentences/testing.wav')
+
+        recorder.splitWavFileAndStore('./sentences/testing.wav')
+
+        print(recorder.wordduration)
+
 
     stream.stop_stream()
     stream.close()
-
-    sentence.statistics()
 
 
 

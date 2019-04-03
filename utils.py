@@ -52,7 +52,7 @@ def storeWavFile(frames, filename):
     waveFile.writeframes(b''.join(frames))
     waveFile.close()
 
-    print ("Done recording, stored in output.wav")
+    # print ("Done recording, stored in output.wav")
 
 
 def db_to_float(db, using_amplitude=True):

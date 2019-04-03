@@ -12,7 +12,7 @@ CHANNELS = 1
 RATE = 44100
 p = pyaudio.PyAudio()
 RECORD_SECONDS = 10
-minimumWordSize = 300  # if the size of the word is <= this, reject the chunk
+minimumWordSize = 300
 maximumWordSize = 2000
 
 
@@ -60,8 +60,8 @@ def detectnoiselevel(): # in dBFS
 
 
 
-def storeWavFile(frames, filename, verbosity = True):
-    print (file) if verbosity else 0
+def storeWavFile(frames, filename):
+    # print (file) if verbosity else 0
     waveFile = wave.open(filename, 'wb')
     waveFile.setnchannels(CHANNELS)
     waveFile.setsampwidth(p.get_sample_size(FORMAT))
@@ -69,7 +69,7 @@ def storeWavFile(frames, filename, verbosity = True):
     waveFile.writeframes(b''.join(frames))
     waveFile.close()
 
-    # print ("Done recording, stored in output.wav") if verbosity else 0
+    # print ("Done recording, stored in output.wav")
 
 
 
