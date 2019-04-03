@@ -2,13 +2,10 @@ import pyaudio
 import sys
 import time
 import numpy as np
-from queue import Queue
 from keras.models import Model, load_model, Sequential, model_from_json
 
+from stutteranalyser import stutteranalyser
 import sys
-
-sys.path.append('/Users/sharan/speechApp')
-
 
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
@@ -161,8 +158,7 @@ class speechmonitor:
 if __name__ == '__main__':
 
     s = speechmonitor()
-
-    # model = loadmodel('./models/average9.json', './models/average9.h5')
+    sentence = stutteranalyser()
 
     stream = s.get_audio_input_stream()
 
@@ -178,6 +174,8 @@ if __name__ == '__main__':
 
     stream.stop_stream()
     stream.close()
+
+    sentence.statistics()
 
 
 
