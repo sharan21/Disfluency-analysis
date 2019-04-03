@@ -25,8 +25,6 @@ subprocess.call('./remove-chunks.sh')
 
 fileOffset = getNumberOfFiles()
 
-
-
 q = Queue()
 
 
@@ -66,8 +64,6 @@ def splitWavFileAndStore(filename, minsillen= 60, silthresh = -60):
         chunk.export(out_file, format="wav")
         # print("done exporting...")
 
-    # print("Total number of files:", i+1)
-
     return i+1
 
 
@@ -77,7 +73,6 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
     # in_data is each chunk corresponding to 0.5 sec size
 
     global run, timeout, data, silence_threshold, fileOffset, writing, frames
-
 
 
     if time.time() > timeout: # stream will continue till timeout is invoked
@@ -91,8 +86,6 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
 
         if (writing == False) and (len(frames) != 0):  # if not writing and data is non empty, store in wav file
 
-            # get new filename
-            # print("saving")
             filename = './samples/test' + str(fileOffset) + '.wav'
             fileOffset = fileOffset + 1
 
@@ -101,18 +94,9 @@ def callback(in_data, frame_count, time_info, status): # also responsible for pu
             #get mfcc of the file just saves and predict
 
 
-            # stream.stop_stream()
-
             data = average(findMfcc(filename))
             q.put(data)
 
-
-
-            # print(data)
-            # data = normalize(data)
-            # print(data)
-
-            # predictsingle(model, data)
 
 
             frames = []
@@ -135,7 +119,7 @@ if __name__ == '__main__':
 
     # Queue to communicate between the audio callback and main thread
 
-    model = loadmodel()
+    model = loadmodel('./models/average9.json', './models/average9.h5')
 
     run = True
 
@@ -147,7 +131,6 @@ if __name__ == '__main__':
     # Data buffer for the input wavform
 
     stream = get_audio_input_stream(callback)  # creates the PyAudio() instance with callback function
-    # every time
     stream.start_stream()
 
     try:
@@ -158,12 +141,6 @@ if __name__ == '__main__':
             # print(n)
             predictsingle(model,n)
 
-
-
-            # new_trigger = has_new_triggerword(preds, chunk_duration, feed_duration)
-            #
-            # if new_trigger:
-            #     sys.stdout.write('1')
 
     except (KeyboardInterrupt, SystemExit):
         stream.stop_stream()

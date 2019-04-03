@@ -43,7 +43,7 @@ def startRecording(seconds = RECORD_SECONDS):
     return frames
 
 
-def storeWavFile(frames, filename, verbosity = True):
+def storeWavFile(frames, filename):
 
     waveFile = wave.open(filename, 'wb')
     waveFile.setnchannels(CHANNELS)
@@ -52,7 +52,7 @@ def storeWavFile(frames, filename, verbosity = True):
     waveFile.writeframes(b''.join(frames))
     waveFile.close()
 
-    print ("Done recording, stored in output.wav") if verbosity else 0
+    print ("Done recording, stored in output.wav")
 
 
 def db_to_float(db, using_amplitude=True):
@@ -151,6 +151,74 @@ def average(mfcc):
     # print (ave_numpy)
 
     return ave_numpy
+
+
+def librosaMfcc(path):
+    list = absoluteFilePaths(path)
+    data = []
+
+
+    for file in list:
+        mfcc = average(findMfcc(file))
+        # deltah = delta(mfcc)
+        #temp = np.concatenate((mfcc, deltah))
+        data.append(mfcc)
+
+
+
+    return np.array(data)
+
+
+def normalizeSoundData(soundDataHere): # takes numpy array and normalizes it
+
+    # print("normalizing the sound data, for {} files".format(len(soundDataHere)))
+
+    for i in range(len(soundDataHere)):
+        # print("normalizing the sound data, for {}st chunk".format(i))
+        mean = np.mean(soundDataHere[i])
+        std = np.std(soundDataHere[i])
+        soundDataHere[i] = (soundDataHere[i] - mean) / std
+        # print("done")
+
+    return soundDataHere
+
+def loadandpredict(pathtojson, pathtoh5, data):
+
+    # print("using model: {}".format(pathtojson))
+
+    # load json and create model
+    json_file = open(pathtojson, 'r')
+    loaded_model_json = json_file.read()
+    json_file.close()
+    loaded_model = model_from_json(loaded_model_json)
+
+    #load weights into new model
+
+    loaded_model.load_weights(pathtoh5)
+    # print("Loaded model from disk")
+
+
+    loaded_model.compile(loss='categorical_crossentropy',
+                  optimizer='adam',
+                  metrics=['accuracy'])
+
+    # print ("compiled the loaded model with cat. cross entropy with adam optim...")
+
+    # print ("shape of data {}".format(data.shape))
+
+    classes = loaded_model.predict(data)
+
+    # print ("done predicting, printing")
+
+
+    for instance in classes:
+
+        print (instance)
+        print (parseinstance(instance))
+
+    return classes
+
+
 
 
 
