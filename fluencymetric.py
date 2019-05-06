@@ -1,0 +1,183 @@
+import time
+import sys
+import subprocess
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+from utils import storeWavFile, getNumberOfFiles
+import pyaudio
+import numpy as np
+from modules.get_words import startRecording, storeWavFile, checkChunk
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
+import subprocess
+from modules.get_mfcc import mfccarray
+from modules.normalize_data import normalizeSoundData
+
+
+class recorder:
+    '''
+    this class can record audio, store it, isolate words, and measure pause durations
+    It first records the sentence then splits it
+    '''
+
+    def __init__(self, name='recorder', duration=10):
+
+        print("hello")
+
+
+
+        self.instancename = name
+
+        self.chunk_duration = 0.1
+        self.fs = 44100
+        self.chunk_samples = int(self.fs * self.chunk_duration)
+
+        self.DEFAULT_CHUNKNAME = './chunks/chunk{}.wav'
+
+        self.frames = []
+
+        self.pausedurations = []
+        self.wordtemp = 0
+
+        self.silencenow = False
+        self.silence_threshold = 100
+
+        self.fileOffset = getNumberOfFiles('./chunks')
+
+        self.run = True
+
+        self.pathtochunks = './chunks'
+
+        self.timestart = time.time()
+        self.duration = duration
+
+
+        self.pathforsentences = './sentences/test.wav'
+
+
+        self.frames = []
+
+        # stats
+
+        self.wordcount = 0
+
+
+
+
+    def __del__(self):
+        print("deleting")
+        subprocess.call('./empty_temp.sh')
+        print('deleted chunks')
+
+
+
+
+    def get_audio_input_stream(self):
+        stream = pyaudio.PyAudio().open(
+            format=pyaudio.paInt16,
+            channels=1,
+            rate=self.fs,
+            input=True,
+            frames_per_buffer=self.chunk_samples,
+            input_device_index=0,
+            stream_callback=self.callback)
+        return stream
+
+
+
+    def splitWavFileAndStore(self, filename, minsillen=60, silthresh=-60):
+        line = AudioSegment.from_wav(filename)
+
+        audio_chunks = split_on_silence(line, min_silence_len=minsillen,
+                                        silence_thresh=silthresh)  # isolation of words is done here
+
+        rejectedOffset = 0
+
+        for i, chunk in enumerate(audio_chunks):  # audio_chunks is a python list
+
+            out_file = self.DEFAULT_CHUNKNAME.format(i + self.fileOffset)
+            # print("size of chunk{}: {} ".format(i+fileOffset, len(chunk)))
+            # print ("exporting", out_file)
+            chunk.export(out_file, format="wav")
+            # print("done exporting...")
+
+        # print("Total number of files:", i+1)
+
+        return i + 1
+
+
+
+
+    def callback(self, in_data, frame_count, time_info, status):
+
+
+        if (time.time() - self.timestart) > self.duration:  # stream will continue till timeout is invoked
+            if self.silencenow:
+                self.pausedurations.append(time.time() - self.wordtemp)
+
+            self.run = False
+
+            # self.pausedurations.pop()
+
+        data_new = np.frombuffer(in_data, dtype='int16')
+        self.frames.append(in_data)
+
+        if np.abs(data_new).mean() < self.silence_threshold:  # find the mean of the chunk for that small duration
+            sys.stdout.write('-')
+            if not self.silencenow:
+                self.silencenow = True
+                # start counting
+                self.wordtemp = time.time()
+
+            return (in_data, pyaudio.paContinue)
+
+        else:
+            sys.stdout.write('.')
+
+            if self.silencenow:
+                self.silencenow = False
+                self.pausedurations.append(time.time() - self.wordtemp)
+
+        return (in_data, pyaudio.paContinue)
+
+    def buildstatistics(self):
+
+        print("building statistics on last 10 seconds...")
+
+        print("{}% fluency in your speech".format(self.llratio * 100))
+
+    def savestatistics(self):
+
+        print("saving stats into the disk")
+
+        f = open("./logs/stats.txt", "a")
+
+        f.write("Name of Instance : '{}' \n".format(self.instancename))
+
+        f.write("")
+
+
+if __name__ == '__main__':
+
+
+    recorder = recorder('rec', 10)
+
+    stream = recorder.get_audio_input_stream()
+
+    while recorder.run:
+        continue
+
+    storeWavFile(recorder.frames, './sentences/recorder.wav')
+
+    recorder.splitWavFileAndStore('./sentences/recorder.wav')
+
+    print(recorder.pausedurations)
+
+
+    stream.stop_stream()
+    stream.close()
+
+
+
+
+

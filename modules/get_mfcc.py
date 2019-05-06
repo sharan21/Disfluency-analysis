@@ -25,7 +25,7 @@ nonllpath = '../LL_chunks/chunk1.wav'
 llpath = '../nonLL_chunks/chunk1.wav'
 
 
-def librosaMfcc(path):
+def mfccarray(path):
     list = absoluteFilePaths(path)
     data = []
 
