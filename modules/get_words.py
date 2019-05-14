@@ -16,9 +16,6 @@ minimumWordSize = 300
 maximumWordSize = 2000
 
 
-
-
-
 def startRecording(seconds = RECORD_SECONDS):
     frames = []
 
@@ -73,7 +70,7 @@ def storeWavFile(frames, filename):
 
 
 
-def splitWavFileAndStore(filename, minsillen= 100, silthresh = -60):
+def splitWavFileAndStore(filename, minsillen= 50, silthresh = -60): # minsillen= 100, silthresh = -60
 
     line = AudioSegment.from_wav(filename)
 
@@ -143,29 +140,26 @@ def askUser():
     return choice
 
 
-
-
 if __name__ == '__main__':
 
 
+    # fileOffset = getNumberOfFiles()  # makes sure that old chunks are not re-written
+    # sentenceOffset = getNumberOfSentences()  # makes sure that old sentences are not re-written
+    # WAVE_OUTPUT_FILENAME = "../LL-sentences/output" + str(sentenceOffset) + ".wav"
+    # DEFAULT_CHUNKNAME = "../LL_chunks/chunk{}.wav"
+    #
+    #
+    #
+    # # min_silence_len = 30  # default for LL
+    # # silence_thresh = -60  # default for LL
+    #
+    #
+    #
+    # askUser()
+    # frames = startRecording(RECORD_SECONDS) # get frames from user
+    # storeWavFile(frames, WAVE_OUTPUT_FILENAME)
+    # splitWavFileAndStore(WAVE_OUTPUT_FILENAME)
 
-    fileOffset = getNumberOfFiles()  # makes sure that old chunks are not re-written
-    sentenceOffset = getNumberOfSentences()  # makes sure that old sentences are not re-written
-    WAVE_OUTPUT_FILENAME = "../LL-sentences/output" + str(sentenceOffset) + ".wav"
-    DEFAULT_CHUNKNAME = "../LL_chunks/chunk{}.wav"
-
-
-
-    # min_silence_len = 30  # default for LL
-    # silence_thresh = -60  # default for LL
-
-
-
-    askUser()
-    frames = startRecording(RECORD_SECONDS) # get frames from user
-    storeWavFile(frames, WAVE_OUTPUT_FILENAME)
-    splitWavFileAndStore(WAVE_OUTPUT_FILENAME)
-
-    # detectnoiselevel()
+    detectnoiselevel()
 
 

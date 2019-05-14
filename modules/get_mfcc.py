@@ -7,10 +7,12 @@ Only implemented for single path, single MFCC extraction and does not automatica
 
 import numpy as np
 import os
+
 import librosa.display
 from modules.get_spectraldata import *
 import matplotlib.pyplot as plt
-# import dtw
+from dtw import dtw
+from numpy.linalg import norm
 from modules.normalize_data import normalizeSoundData
 from modules.import_words import shuffle_in_unison_scary
 
@@ -50,16 +52,17 @@ def plotMfcc(mfcc1, mfcc2):
 
 
 
-# def computeDistace(mfcc1, mfcc2):
-#
-#     print("Finding DTW between the 2 mfccs")
-#     dist, cost, acc_cost, path = dtw(mfcc1.T, mfcc2.T, dist=lambda x, y: norm(x - y, ord=1))
-#     print ('Normalized distance between the two sounds:', dist)
-#     plt.imshow(cost.T, origin='lower', cmap=plt.get_cmap('gray'), interpolation='nearest')
-#     plt.plot(path[0], path[1], 'w')
-#     plt.xlim((-0.5, cost.shape[0] - 0.5))
-#     plt.ylim((-0.5, cost.shape[1] - 0.5))
-#     plt.show()
+def computeDistace(mfcc1, mfcc2):
+
+    # print("Finding DTW between the 2 mfccs")
+    dist, cost, acc_cost, path = dtw(mfcc1.T, mfcc2.T, dist=lambda x, y: norm(x - y, ord=1))
+    # print ('Normalized distance between the two sounds:', dist)
+    # plt.imshow(cost.T, origin='lower', cmap=plt.get_cmap('gray'), interpolation='nearest')
+    # plt.plot(path[0], path[1], 'w')
+    # plt.xlim((-0.5, cost.shape[0] - 0.5))
+    # plt.ylim((-0.5, cost.shape[1] - 0.5))
+    # plt.show()
+    return(dist)
 
 def padMfcc(mfcc, fixedsize = 30):
     print ("padding mfcc")
@@ -94,25 +97,23 @@ def getMfccAverage(): # return average of all mfccs for each word in numpy array
 
     return np.array(data)
 
-def getndimMfcc(): # return average of all mfccs for each word
+def getndimMfcc(pathlist): # return average of all mfccs for each word
 
     # first creating the dir list
-    pathlist = []
 
-    pathlist.extend(absoluteFilePaths('../LL_chunks'))
-    pathlist.extend(absoluteFilePaths('../nonLL_chunks'))
 
-    print ("path list is",pathlist)
+    # print("path list is",pathlist)
 
     data = []
 
     for path in pathlist:
-        print ("finding mfcc of", path)
+        print("finding mfcc of", path)
 
         data.append(findMfcc(path))
-        print (len(data[-1]))
+        # print(data[-1])
+        # print (len(data[-1]))
 
-    return np.array(data)
+    return data
 
 def getMfccDelta():
     # first creating the dir list
@@ -185,6 +186,7 @@ def getFinalNormalizedMfcc(): #shuffling occurs here
 
 
     return data, labels
+
 
 
 def flatten():
