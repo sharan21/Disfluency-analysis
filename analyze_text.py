@@ -45,6 +45,8 @@ def filler_words(segments, filler='[SPEECH]'):
     '''
     if not filler == '[SPEECH]':
         filler = filler.lower()
+
+    sys.stdout = open('./logs/stats.txt', 'a')
         
     num_filler = segments.count(filler)
     total_words = len(segments)
@@ -56,7 +58,11 @@ def filler_words(segments, filler='[SPEECH]'):
     print ('percent of filler words', percent)
     print ('compared to TED standard frequency of filler words (0.005589%)...')
     compare_to_standard(percent, 0.005589) # gold standard is hard coded into the program right now
-    return percent
+
+    print("\n")
+
+    sys.stdout = sys.__stdout__
+    return num_filler
     
 def compare_to_standard(percent, standard):
     ''' This function takes in the percentage of the user's usage of filler

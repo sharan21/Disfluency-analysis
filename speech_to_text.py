@@ -5,6 +5,7 @@ import sys
 import time
 import wave
 from analyze_text import *
+from modules.get_mfcc import absoluteFilePaths
 
 __author__ = 'Emily Ahn and Elizabeth Hau'
 
@@ -21,7 +22,7 @@ __author__ = 'Emily Ahn and Elizabeth Hau'
 MODELDIR = "/Users/sharan/pocketsphinx-python/pocketsphinx/model"
 GOLD_DATADIR = "/home/sravana/data/cslu_fae_corpus/cs349" # gold standard wav files
 DATADIR = "data" #wav files
-HYPDIR = "data/hyp_test" # stores test hypotheses
+HYPDIR = "./hyp_test" # stores test hypotheses
 
 # paths to dictionaries
 hmmd = '/Users/sharan/pocketsphinx-python/pocketsphinx/model/en-us'
@@ -41,12 +42,12 @@ def write_hypothesis(outfile, segments):
             o.write(word+' ')  
     o.close()  
     
-def decode(datadir, filename):
+def decode(path):
     ''' Decode streaming data.'''
     decoder = Decoder(config)
     decoder.start_utt()
     
-    stream = open(path.join(datadir,filename),'rb')
+    stream = open(path,'rb')
     
     while True:
         buf = stream.read(1024)
@@ -56,9 +57,9 @@ def decode(datadir, filename):
             break
     decoder.end_utt()
     segments = [seg.word for seg in decoder.seg()]
-    f = 'hypothesis-'+filename.split('.')[0]+'.txt'
-    print ('Best hypothesis segments: ', [seg.word for seg in decoder.seg()])
-    write_hypothesis(f, segments)
+    # f = 'hypothesis-'+filename.split('.')[0]+'.txt'
+    # print ('Best hypothesis segments: ', [seg.word for seg in decoder.seg()])
+    # write_hypothesis(f, segments)
     return segments
 
 def file_in_correct_format(filename):
@@ -83,12 +84,16 @@ if __name__=='__main__':
     global filename
     start = time.time()
 
+    list = absoluteFilePaths('./data')
 
-    filename = "demo.wav"
-    segments = decode(DATADIR, filename)
-    new_list = preprocess_segments(segments)
-    print('\n************* RESULTS ****************')
-    filler_words(new_list)
+    for l in list:
+
+
+        # filename = "demo.wav"
+        segments = decode(l)
+        new_list = preprocess_segments(segments)
+        print('\n************* RESULTS ****************')
+        filler_words(new_list)
         
     # elif len(sys.argv)==3:
     #     # if two arguments provided, the first argument will be the data directory and the second the filename
@@ -108,5 +113,7 @@ if __name__=='__main__':
     #         if not f.startswith('.') and path.isfile(path.join(DATADIR, f)):
     #             if file_in_correct_format(path.join(DATADIR, f)):
     #                 decode(DATADIR, f)
+
+
     end = time.time()
     print('time elapsed:', (end - start))

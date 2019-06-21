@@ -329,10 +329,7 @@ def findMfcc(path):
 
 if __name__ == '__main__':
 
-
-
     model = loadmodel(pathtojson, pathtoh5)
-
     data = importmfccfromdir()
     print(data.shape)
     normalizeall(data)
@@ -340,11 +337,6 @@ if __name__ == '__main__':
     predict(model, data)
 
 
-    # print(("main"))
-    #
-    # a = ['a', 'b', 'c']
-    # b = ['a', 'b', 'c', 'd', 'e']
-    #
-    # print(diff(b,a))
+
 
 

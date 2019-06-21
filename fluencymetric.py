@@ -10,6 +10,8 @@ from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import subprocess
 from modules.get_mfcc import *
+import os
+from modules.get_mfcc import absoluteFilePaths
 from modules.normalize_data import normalizeSoundData
 
 class recorder:
@@ -41,14 +43,14 @@ class recorder:
         self.timestart = time.time()
         self.duration = duration
 
-        # self.pathforsentences = './sentences/test.wav'
+        # self.pathforsentences = './sentences/class1.wav'
         self.pathforsentences = './data/demo.wav'
         self.frames = []
         self.wordmatches = []
 
 
         #thresholds
-        self.pausethresh = 2.5
+        self.pausethresh = 0.5
 
         #disfluencies
         self.repetitions = 0
@@ -154,7 +156,7 @@ class recorder:
         print("analysing the chunks in './chunks...")
 
         self.pathlist = [path for path in absoluteFilePaths(recorder.pathtochunks) if(path != '.DS_Store')]
-        self.pathlist.remove([path for path in self.pathlist if 'chunk1.wav' in path][0])
+        # self.pathlist.remove([path for path in self.pathlist if 'chunk1.wav' in path][0])
         print("path list is {}".format(self.pathlist))
         recorder.mfccarray = getndimMfcc(recorder.pathlist)
         print("asserting that all chunks have equal no. of coefficients")
@@ -206,43 +208,57 @@ class recorder:
 
         f = open("./logs/stats.txt", "a")
 
-        # f.write("Name of Instance : '{}' \n".format(self.instancename))
-        #
-        # f.write("Total number of words: {} \n".format(self.wordcount))
-        #
-        # f.write("Number of LL words: {} \n ".format(self.llcount))
-        #
-        # f.write("LL ratio: {} \n".format(self.llratio))
-        #
-        # f.write("")
-
-        f.write("{} {} {} {} \n".format(self.blockages, self.repetitions, self.wordcount, self.disfluency))
+        f.write("No of Blocks:{} No of Reps: {} Word Count: {} Disfluency Ratio: {} \n".format(self.blockages, self.repetitions, self.wordcount, self.disfluency))
 
 
 if __name__ == '__main__':
 
-    subprocess.call('./empty_temp.sh')
+
+
+    list = absoluteFilePaths("./data")
+
+
 
     recorder = recorder('rec', 8)
-    stream = recorder.get_audio_input_stream()
 
-    while recorder.run:
-        continue
+    # stream = recorder.get_audio_input_stream()
+    #
+    # while recorder.run:
+    #     continue
+    #
+    # stream.stop_stream()
+    # stream.close()
+    #
+    # storeWavFile(recorder.frames, recorder.pathforsentences)
 
-    stream.stop_stream()
-    stream.close()
+    start = time.time()
 
-    storeWavFile(recorder.frames, recorder.pathforsentences)
-    recorder.splitWavFileAndStore(recorder.pathforsentences)
+    for l in list:
 
-    print(recorder.pausedurations)
 
-    recorder.analyse()
 
-    #find and count disfluencies
-    recorder.countrepetitons()
-    recorder.countblockages()
-    recorder.writestats()
+
+        recorder.splitWavFileAndStore(l)
+
+        print(recorder.pausedurations)
+
+        recorder.analyse()
+
+        #find and count disfluencies
+        recorder.countrepetitons()
+        recorder.countblockages()
+        recorder.writestats()
+
+
+
+        subprocess.call('./empty_temp.sh')
+
+    end = time.time()
+
+    print('time elapsed:', (end - start))
+
+    os.system("python3 speech_to_text.py")
+
 
 
 

@@ -1,2 +1,309 @@
-0 0 3 0.0 
-0 2 10 0.2 
+No of Blocks:0 No of Reps: 0 Word Count: 10 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 8 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 12 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 8 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 9 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 9 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 10 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 13 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 6 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 8 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 1 Word Count: 13 Disfluency Ratio: 0.07692307692307693 
+No of Blocks:0 No of Reps: 1 Word Count: 8 Disfluency Ratio: 0.125 
+No of Blocks:0 No of Reps: 1 Word Count: 10 Disfluency Ratio: 0.1 
+No of Blocks:0 No of Reps: 1 Word Count: 9 Disfluency Ratio: 0.1111111111111111 
+No of Blocks:0 No of Reps: 2 Word Count: 11 Disfluency Ratio: 0.18181818181818182 
+No of Blocks:0 No of Reps: 2 Word Count: 7 Disfluency Ratio: 0.2857142857142857 
+No of Blocks:0 No of Reps: 2 Word Count: 5 Disfluency Ratio: 0.4 
+No of Blocks:0 No of Reps: 2 Word Count: 11 Disfluency Ratio: 0.18181818181818182
+
+No of Blocks:0 No of Reps: 2 Word Count: 7 Disfluency Ratio: 0.2857142857142857 
+No of Blocks:0 No of Reps: 2 Word Count: 9 Disfluency Ratio: 0.2222222222222222 
+No of Blocks:0 No of Reps: 2 Word Count: 7 Disfluency Ratio: 0.2857142857142857 
+No of Blocks:0 No of Reps: 2 Word Count: 13 Disfluency Ratio: 0.15384615384615385
+
+No of Blocks:0 No of Reps: 3 Word Count: 11 Disfluency Ratio: 0.2727272727272727 
+No of Blocks:0 No of Reps: 3 Word Count: 5 Disfluency Ratio: 0.6 
+No of Blocks:0 No of Reps: 3 Word Count: 7 Disfluency Ratio: 0.42857142857142855 
+No of Blocks:0 No of Reps: 3 Word Count: 9 Disfluency Ratio: 0.3333333333333333
+
+No of Blocks:0 No of Reps: 3 Word Count: 11 Disfluency Ratio: 0.2727272727272727 
+No of Blocks:0 No of Reps: 3 Word Count: 12 Disfluency Ratio: 0.25 
+No of Blocks:0 No of Reps: 3 Word Count: 7 Disfluency Ratio: 0.42857142857142855 
+No of Blocks:0 No of Reps: 3 Word Count: 8 Disfluency Ratio: 0.375 
+total_words: 29
+number of  um or uh said: 1
+percent of filler words 0.034482758620689655
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 15
+number of  um or uh said: 0
+percent of filler words 0.0
+compared to TED standard frequency of filler words (0.005589%)...
+GOOD JOB. You don't use many filler words.
+
+
+total_words: 17
+number of  um or uh said: 0
+percent of filler words 0.0
+compared to TED standard frequency of filler words (0.005589%)...
+GOOD JOB. You don't use many filler words.
+
+
+total_words: 21
+number of  um or uh said: 0
+percent of filler words 0.0
+compared to TED standard frequency of filler words (0.005589%)...
+GOOD JOB. You don't use many filler words.
+
+
+total_words: 19
+number of  um or uh said: 2
+percent of filler words 0.10526315789473684
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 23
+number of  um or uh said: 2
+percent of filler words 0.08695652173913043
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 26
+number of  um or uh said: 1
+percent of filler words 0.038461538461538464
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 23
+number of  um or uh said: 2
+percent of filler words 0.08695652173913043
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 25
+number of  um or uh said: 1
+percent of filler words 0.04
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 27
+number of  um or uh said: 2
+percent of filler words 0.07407407407407407
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 22
+number of  um or uh said: 1
+percent of filler words 0.045454545454545456
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 18
+number of  um or uh said: 1
+percent of filler words 0.05555555555555555
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 34
+number of  um or uh said: 2
+percent of filler words 0.058823529411764705
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 21
+number of  um or uh said: 2
+percent of filler words 0.09523809523809523
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 11
+number of  um or uh said: 0
+percent of filler words 0.0
+compared to TED standard frequency of filler words (0.005589%)...
+GOOD JOB. You don't use many filler words.
+
+
+total_words: 26
+number of  um or uh said: 1
+percent of filler words 0.038461538461538464
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 25
+number of  um or uh said: 3
+percent of filler words 0.12
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 21
+number of  um or uh said: 0
+percent of filler words 0.0
+compared to TED standard frequency of filler words (0.005589%)...
+GOOD JOB. You don't use many filler words.
+
+
+total_words: 26
+number of  um or uh said: 7
+percent of filler words 0.2692307692307692
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 28
+number of  um or uh said: 2
+percent of filler words 0.07142857142857142
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 29
+number of  um or uh said: 1
+percent of filler words 0.034482758620689655
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 16
+number of  um or uh said: 3
+percent of filler words 0.1875
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 20
+number of  um or uh said: 3
+percent of filler words 0.15
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 14
+number of  um or uh said: 1
+percent of filler words 0.07142857142857142
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 13
+number of  um or uh said: 1
+percent of filler words 0.07692307692307693
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 22
+number of  um or uh said: 1
+percent of filler words 0.045454545454545456
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 20
+number of  um or uh said: 3
+percent of filler words 0.15
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 23
+number of  um or uh said: 2
+percent of filler words 0.08695652173913043
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 23
+number of  um or uh said: 1
+percent of filler words 0.043478260869565216
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 23
+number of  um or uh said: 1
+percent of filler words 0.043478260869565216
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 22
+number of  um or uh said: 2
+percent of filler words 0.09090909090909091
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 18
+number of  um or uh said: 1
+percent of filler words 0.05555555555555555
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 27
+number of  um or uh said: 2
+percent of filler words 0.07407407407407407
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+total_words: 19
+number of  um or uh said: 3
+percent of filler words 0.15789473684210525
+compared to TED standard frequency of filler words (0.005589%)...
+Keep practicing! You still use too many filler words
+
+
+No of Blocks:0 No of Reps: 0 Word Count: 10 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 8 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 12 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 8 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 9 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 9 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 7 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 10 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 13 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 6 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 0 Word Count: 8 Disfluency Ratio: 0.0 
+No of Blocks:0 No of Reps: 1 Word Count: 13 Disfluency Ratio: 0.07692307692307693 
+No of Blocks:0 No of Reps: 1 Word Count: 8 Disfluency Ratio: 0.125 
+No of Blocks:0 No of Reps: 1 Word Count: 10 Disfluency Ratio: 0.1 
+No of Blocks:0 No of Reps: 1 Word Count: 9 Disfluency Ratio: 0.1111111111111111 
+No of Blocks:0 No of Reps: 2 Word Count: 11 Disfluency Ratio: 0.18181818181818182 
+No of Blocks:0 No of Reps: 2 Word Count: 7 Disfluency Ratio: 0.2857142857142857 
+No of Blocks:0 No of Reps: 2 Word Count: 5 Disfluency Ratio: 0.4 
+No of Blocks:0 No of Reps: 2 Word Count: 11 Disfluency Ratio: 0.18181818181818182 
+No of Blocks:0 No of Reps: 2 Word Count: 7 Disfluency Ratio: 0.2857142857142857 
+No of Blocks:0 No of Reps: 2 Word Count: 9 Disfluency Ratio: 0.2222222222222222 
+No of Blocks:0 No of Reps: 2 Word Count: 7 Disfluency Ratio: 0.2857142857142857 
+No of Blocks:0 No of Reps: 2 Word Count: 13 Disfluency Ratio: 0.15384615384615385 
+No of Blocks:0 No of Reps: 3 Word Count: 11 Disfluency Ratio: 0.2727272727272727 
+No of Blocks:0 No of Reps: 3 Word Count: 5 Disfluency Ratio: 0.6 
+No of Blocks:0 No of Reps: 3 Word Count: 7 Disfluency Ratio: 0.42857142857142855 
+No of Blocks:0 No of Reps: 3 Word Count: 9 Disfluency Ratio: 0.3333333333333333 
+No of Blocks:0 No of Reps: 3 Word Count: 11 Disfluency Ratio: 0.2727272727272727 
+No of Blocks:0 No of Reps: 3 Word Count: 12 Disfluency Ratio: 0.25 
+No of Blocks:0 No of Reps: 3 Word Count: 7 Disfluency Ratio: 0.42857142857142855 
+No of Blocks:0 No of Reps: 3 Word Count: 8 Disfluency Ratio: 0.375 
