@@ -14,6 +14,17 @@ import os
 from modules.get_mfcc import absoluteFilePaths
 from modules.normalize_data import normalizeSoundData
 
+__author__ = 'Sharan Narasimhan'
+
+''' *************************** fluencymetric.py ******************************
+    This file allows users to record themselves using the microphone of
+    their local computer and saves the recorded file, splits it into its 
+    correspondind words and counts the number of disfluencies present. 
+    It then optioanlly saves the results
+     into a logs.txt file.
+    *******************************************************************
+'''
+
 class recorder:
     '''
     this class can record audio, store it, isolate words, and measure pause durations
@@ -202,8 +213,6 @@ class recorder:
 
         self.disfluency = float(self.repetitions + self.blockages)/float(self.wordcount)
 
-
-
         print("saving stats into the disk")
 
         f = open("./logs/stats.txt", "a")
@@ -216,8 +225,6 @@ if __name__ == '__main__':
 
 
     list = absoluteFilePaths("./data")
-
-
 
     recorder = recorder('rec', 8)
 
@@ -236,8 +243,6 @@ if __name__ == '__main__':
     for l in list:
 
 
-
-
         recorder.splitWavFileAndStore(l)
 
         print(recorder.pausedurations)
@@ -248,7 +253,6 @@ if __name__ == '__main__':
         recorder.countrepetitons()
         recorder.countblockages()
         recorder.writestats()
-
 
 
         subprocess.call('./empty_temp.sh')
